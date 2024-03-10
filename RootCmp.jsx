@@ -7,7 +7,7 @@ import { AppHeader } from './cmps/AppHeader.jsx'
 
 
 export function App() {
-    const [page, setPage] = useState('home')
+    const [page, setPage] = useState('book')
 
     return <section className="app">
         <AppHeader setPage={setPage} />
