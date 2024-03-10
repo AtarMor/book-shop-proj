@@ -2,7 +2,7 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const BOOK_KEY = 'bookDB'
-var gFilterBy = {title: '', price: 0}
+// var gFilterBy = { title: '', price: 0 }
 _createBooks()
 
 export const bookService = {
@@ -10,22 +10,24 @@ export const bookService = {
     get,
     remove,
     save,
-    getEmptyBook: getEmptyBook,
     getNextBookId,
-    getFilterBy,
-    setFilterBy
+    // getFilterBy,
+    // setFilterBy
 }
+
+/// for debug only///
+window.bs = bookService
 
 function query() {
     return storageService.query(BOOK_KEY)
         .then(books => {
-            if (gFilterBy.txt) {
-                const regex = new RegExp(gFilterBy.txt, 'i')
-                books = books.filter(book => regex.test(book.vendor))
-            }
-            if (gFilterBy.price) {
-                books = books.filter(book => book.price >= gFilterBy.price)
-            }
+            // if (gFilterBy.txt) {
+            //     const regex = new RegExp(gFilterBy.txt, 'i')
+            //     books = books.filter(book => regex.test(book.vendor))
+            // }
+            // if (gFilterBy.price) {
+            //     books = books.filter(book => book.price >= gFilterBy.price)
+            // }
             return books
         })
 }
@@ -50,15 +52,15 @@ function getEmptyBook(title = '', price = 0) {
     return { id: '', title, price }
 }
 
-function getFilterBy() {
-    return { ...gFilterBy }
-}
+// function getFilterBy() {
+//     return { ...gFilterBy }
+// }
 
-function setFilterBy(filterBy = {}) {
-    if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
-    if (filterBy.price !== undefined) gFilterBy.price = filterBy.price
-    return gFilterBy
-}
+// function setFilterBy(filterBy = {}) {
+//     if (filterBy.txt !== undefined) gFilterBy.txt = filterBy.txt
+//     if (filterBy.price !== undefined) gFilterBy.price = filterBy.price
+//     return gFilterBy
+// }
 
 function getNextBookId(bookId) {
     return storageService.query(BOOK_KEY)
@@ -73,13 +75,23 @@ function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = []
-        books.push(_createBook('Harry Potter', 300))
+        books.push(_createBook('Harry Potter', 100))
+        books.push(_createBook('Harry Potter2', 120))
+        books.push(_createBook('Harry Potter3', 110))
         utilService.saveToStorage(BOOK_KEY, books)
     }
 }
 
-function _createBook(title, price = 250) {
-    const book = getEmptyBook(title, price)
-    book.id = utilService.makeId()
-    return book
+function _createBook(title, amount, currencyCode = 'EUR', isOnSale = false) {
+    return {
+        id: utilService.makeId(),
+        title,
+        description: utilService.makeLorem(20),
+        thumbnail: 'http://coding-academy.org/books-photos/20.jpg',
+        listPrice: {
+            amount,
+            currencyCode,
+            isOnSale
+        }
+    }
 }
