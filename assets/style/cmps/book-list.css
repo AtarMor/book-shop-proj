@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+}
+
+.book-list {
+    list-style-type: none;
+    position: relative;
+    gap: 30px
+}
+
+.book-list img {
+    max-width: 80px;
+}
+
+.book-actions.remove-btn {
+    position: absolute;
+}
+
+.book-actions.show-details-btn {
+    position: absolute;
+}
