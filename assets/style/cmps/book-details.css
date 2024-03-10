@@ -1,3 +1,15 @@
 .book-details {
     text-align: center;
 }
+
+.book-details .green {
+    color: rgb(68, 216, 68);
+}
+
+.book-details .red {
+    color: rgb(216, 68, 68);
+}
+
+.book-details .on-sale {
+    background-color: rgb(97, 180, 55);
+}
