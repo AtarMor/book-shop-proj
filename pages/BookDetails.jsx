@@ -2,7 +2,9 @@ const { useState, useEffect } = React
 const { useParams, useNavigate } = ReactRouter
 const { Link } = ReactRouterDOM
 
+import { AddReview } from "../cmps/AddReview.jsx"
 import { LongTxt } from "../cmps/LongTxt.jsx"
+import { ReviewList } from "../cmps/ReviewList.jsx"
 import { bookService } from "../services/book.service.js"
 
 export function BookDetails() {
@@ -12,21 +14,21 @@ export function BookDetails() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-		loadBook()
-	}, [params.bookId])
+        loadBook()
+    }, [params.bookId])
 
-	function loadBook() {
+    function loadBook() {
         setIsLoading(true)
-		bookService.get(params.bookId)
-			.then(book => setBook(book))
-			.catch(err => {
-				console.log('Had issues loading book', err)
-				navigate('/book')
-			})
+        bookService.get(params.bookId)
+            .then(book => setBook(book))
+            .catch(err => {
+                console.log('Had issues loading book', err)
+                navigate('/book')
+            })
             .finally(() => {
-				setIsLoading(false)
-			})
-	}
+                setIsLoading(false)
+            })
+    }
 
     function readingLevel() {
         if (book.pageCount > 500) return 'Serious Reading'
@@ -66,9 +68,17 @@ export function BookDetails() {
         <p>Language: {book.language}</p>
 
         <div className="flex justify-between">
-			<Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
-			<Link to={`/book/Edit/${book.id}`}><button>Edit book</button></Link>
-			<Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
-		</div>
+            <Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
+            <Link to={`/book/Edit/${book.id}`}><button>Edit book</button></Link>
+            <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
+        </div>
+        <div><ReviewList
+            reviews={book.reviews}
+        />
+        </div>
+        <AddReview
+            // onAddReview={onAddReview}
+            // onRemoveReview={onRemoveReview}
+        />
     </section>
 }

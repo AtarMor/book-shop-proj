@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 import { BookPreview } from "./BookPreview.jsx"
 
 
-export function BookList({ books }) {
+export function BookList({ books, onRemoveBook }) {
 
     if (!books || !books.length) return <div>No books to show</div>
     return <ul className="book-list flex wrap">
@@ -13,7 +13,7 @@ export function BookList({ books }) {
                     <BookPreview book={book} />
                 </Link>
                 <div className="book-actions flex justify-between">
-                    <button className="remove-btn">X</button>
+                    <button className="remove-btn" onClick={() => onRemoveBook(book.id)}>X</button>
                     <Link to={`/book/${book.id}`}><button>See details</button></Link>
                 </div>
             </li>)

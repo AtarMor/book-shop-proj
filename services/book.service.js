@@ -14,7 +14,8 @@ export const bookService = {
   getNextBookId,
   getFilterBy,
   setFilterBy,
-  getEmptyBook
+  getEmptyBook,
+  addReview
 }
 
 /// for debug only///
@@ -74,6 +75,17 @@ function getNextBookId(bookId) {
     })
 }
 
+function addReview(bookId, review) {
+  get(bookId)
+    .then(book => {
+      if (!book.reviews) book.reviews = []
+      book.reviews.push(review)
+      const x = storageService.put(BOOK_KEY, book)
+      console.log('x:', x)
+    }
+    )
+}
+
 function _createBooks() {
   let books = utilService.loadFromStorage(BOOK_KEY)
   if (!books || !books.length) {
@@ -89,7 +101,7 @@ function _createBooks() {
 }
 
 // id=utilService.makeId()
-function _createBook(id, title='', amount=0) {
+function _createBook(id, title = '', amount = 0) {
   return {
     id,
     title,
