@@ -20,7 +20,7 @@ export function BookFilter({ onSetFilter, filterBy }) {
 	}
 
 	return <section className="book-filter">
-		<h2>filter our books</h2>
+		<h2>Filter our books</h2>
 
 		<form onSubmit={onFilter}>
 			<label htmlFor="title">Title</label>

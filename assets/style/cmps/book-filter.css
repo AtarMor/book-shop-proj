@@ -1,0 +1,15 @@
+.book-filter {
+    background-color: var(--gray1);
+    padding: 1rem;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.114);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.book-filter h2 {
+    font-size: 1rem;
+}
+
+.book-filter form > * {
+    margin-inline-end: 0.6em;
+}

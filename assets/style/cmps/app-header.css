@@ -1,16 +1,24 @@
 .app-header {
-  background-color: var(--clr1);
-  color: var(--clr1bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightblue;
   padding: 1em;
+}
+
+.app-header > *{
+  color: black;
 }
 
 .app-header h1 {
   cursor: pointer;
+  font-family: 'Edu VIC WA NT Beginner', cursive;
 }
 
 .app-nav {
   display: flex;
-  gap: 15px;
+  gap: 30px;
+
 }
 
 .app-nav .active {

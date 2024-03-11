@@ -1,10 +1,30 @@
 .book-preview{
-    padding: .5em;
+    padding-block: .5em;
     width: 200px;
     height: 266px;
-    background-color: var(--clr1bg-light);
     text-align: center;
-    font-family:‘Edu VIC WA NT Beginner’, cursive;
     border-radius: 10px;
     gap: 10px;
+}
+
+.book-preview > *{
+    font-size: 0.9rem;
+}
+
+.book-preview h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.book-preview h4 {
+    position: relative;
+}
+
+.book-preview h4.on-sale {
+    display: flex;
+    position: absolute;
+    background-color: #fff;
+    padding: 0.5em 0.2em;
+    translate: 138px -59px;
+    border-radius: 5px;
 }
