@@ -1,7 +1,7 @@
 export function Home() {
     return (
         <section>
-            <h2>Home Sweet Home</h2>
+            <h2>Our book shop</h2>
         </section>
     )
 }
