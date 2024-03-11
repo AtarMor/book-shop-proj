@@ -9,17 +9,22 @@ export function BookDetails() {
     const [book, setBook] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
 		loadBook()
 	}, [params.bookId])
 
 	function loadBook() {
+        setIsLoading(true)
 		bookService.get(params.bookId)
 			.then(book => setBook(book))
 			.catch(err => {
 				console.log('Had issues loading book', err)
 				navigate('/book')
+			})
+            .finally(() => {
+				setIsLoading(false)
 			})
 	}
 
@@ -42,7 +47,7 @@ export function BookDetails() {
         if (book.listPrice.amount < 20) return 'green'
     }
 
-    if (!book) return <div>Loading details...</div>
+    if (isLoading) return <div>Loading details...</div>
     return <section className="book-details">
         <Link to="/book"><button>Go back</button></Link>
         <h1>{book.title}</h1>
