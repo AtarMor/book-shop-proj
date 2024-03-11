@@ -13,7 +13,8 @@ export const bookService = {
   save,
   getNextBookId,
   getFilterBy,
-  setFilterBy
+  setFilterBy,
+  getEmptyBook
 }
 
 /// for debug only///
@@ -50,6 +51,10 @@ function save(book) {
   }
 }
 
+function getEmptyBook() {
+  return _createBook()
+}
+
 function getFilterBy() {
   return { ...gFilterBy }
 }
@@ -83,10 +88,11 @@ function _createBooks() {
   }
 }
 
-function _createBook() {
+// id=utilService.makeId()
+function _createBook(id, title='', amount=0) {
   return {
-    id: utilService.makeId(),
-    title: 'metus hendrerit',
+    id,
+    title,
     subtitle: utilService.makeLorem(15),
     authors: ['Oren Yaniv'],
     publishedDate: utilService.getRandomInt(1700, 2022),
@@ -96,7 +102,7 @@ function _createBook() {
     thumbnail: 'http://coding-academy.org/books-photos/20.jpg',
     language: 'en',
     listPrice: {
-      amount: utilService.getRandomInt(10, 30),
+      amount,
       currencyCode: 'EUR',
       isOnSale: false,
     }
@@ -111,7 +117,7 @@ function _setNextPrevBookId(book) {
     book.nextBookId = nextBook.id
     book.prevBookId = prevBook.id
     return book
-})
+  })
 }
 
 gBooks = [

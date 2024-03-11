@@ -1,7 +1,7 @@
 export const utilService = {
     makeId,
     makeLorem,
-    getRandomIntInclusive,
+    getRandomInt,
     loadFromStorage,
     saveToStorage,
     padNum,
@@ -30,10 +30,10 @@ function makeLorem(size = 100) {
     return txt
 }
 
-function getRandomIntInclusive(min, max) {
+function getRandomInt(min, max) {
     min = Math.ceil(min)
     max = Math.floor(max)
-    return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
+    return Math.floor(Math.random() * (max - min)) + min //The maximum is inclusive and the minimum is inclusive 
 }
 
 function saveToStorage(key, value) {

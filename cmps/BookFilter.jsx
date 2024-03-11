@@ -19,7 +19,6 @@ export function BookFilter({ onSetFilter, filterBy }) {
 		onSetFilter(filterByToEdit)
 	}
 
-	console.log('filterByToEdit', filterByToEdit)
 	return <section className="book-filter">
 		<h2>filter our books</h2>
 

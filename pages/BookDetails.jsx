@@ -67,6 +67,7 @@ export function BookDetails() {
 
         <div className="flex justify-between">
 			<Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
+			<Link to={`/book/Edit/${book.id}`}><button>Edit book</button></Link>
 			<Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
 		</div>
     </section>
