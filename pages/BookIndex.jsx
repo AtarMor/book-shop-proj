@@ -10,6 +10,7 @@ import { bookService } from "../services/book.service.js"
 export function BookIndex() {
     const [books, setBooks] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getFilterBy())
+    const [userMsg, setUserMsg] = useState('')
 
     useEffect(() => {
         loadBooks()
