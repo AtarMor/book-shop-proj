@@ -59,5 +59,10 @@ export function BookDetails() {
         <p>Publish date: {book.publishedDate}</p>
         <p>Page count: {book.pageCount} {readingLevel()}</p>
         <p>Language: {book.language}</p>
+
+        <div className="flex justify-between">
+			<Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
+			<Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
+		</div>
     </section>
 }
