@@ -4,7 +4,9 @@ const { Link } = ReactRouterDOM
 
 import { BookList } from "../cmps/BookList.jsx"
 import { BookFilter } from "../cmps/BookFilter.jsx"
+import { BookAdd } from "../cmps/BookAdd.jsx"
 
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { bookService } from "../services/book.service.js"
 
 export function BookIndex() {
@@ -41,7 +43,7 @@ export function BookIndex() {
                 console.log('Had issues removing car', err)
                 showErrorMsg(`Car removed successfully (${bookId})`)
             })
-        }
+    }
 
     if (!books) return <div>loading...</div>
     return <section className="book-index">
@@ -49,6 +51,7 @@ export function BookIndex() {
             onSetFilter={onSetFilter}
             filterBy={filterBy} />
         <Link to="/book/edit"><button>Add a book</button></Link>
+        <BookAdd />
         <BookList
             books={books}
             onRemoveBook={onRemoveBook}

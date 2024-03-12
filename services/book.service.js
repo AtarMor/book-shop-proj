@@ -15,7 +15,8 @@ export const bookService = {
   getFilterBy,
   setFilterBy,
   getEmptyBook,
-  addReview
+  addReview,
+  addGoogleBook
 }
 
 /// for debug only///
@@ -80,11 +81,19 @@ function addReview(bookId, review) {
     .then(book => {
       if (!book.reviews) book.reviews = []
       book.reviews.push(review)
-      const x = storageService.put(BOOK_KEY, book)
-      console.log('x:', x)
+      storageService.put(BOOK_KEY, book)
     }
     )
 }
+
+function addGoogleBook(book) {
+  return storageService.query(BOOK_KEY)
+    .then(books => {
+      const idx = books.findIndex(b => b.id === book.id)
+        if (idx >= 0) throw new Error(`book exists already`)
+        else storageService.postFromGoogle(BOOK_KEY, book)
+    })
+  }
 
 function _createBooks() {
   let books = utilService.loadFromStorage(BOOK_KEY)
