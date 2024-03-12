@@ -28,3 +28,12 @@
     translate: 138px -59px;
     border-radius: 5px;
 }
+
+.add-review {
+    margin: 1em;
+}
+
+.add-review form>* {
+    margin-inline-end: 1em;
+    margin-block-end: 0.5em;
+}

@@ -1,6 +1,58 @@
 .book-details {
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: var(--gray1);
+    padding: 0.5em;
+    /* justify-content: center;
+    align-items: center; */
 }
+
+
+.book-details button {
+    margin: 0;
+    padding: 0.3em 0.5em;
+}
+
+.book-details .book-title {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.book-details .book-subtitle {
+    font-size: 1rem;
+}
+
+.book-details .book-author {
+    margin: 0 0.5em
+}
+
+.book-details .author-name {
+    display: inline;
+}
+
+.book-details img {
+    padding: 1em;
+    align-self: center;
+}
+
+.book-details .price {
+    display: inline;
+    font-size: 1rem;
+}
+
+.book-details .on-sale {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    display: inline;
+    color: green;
+}
+
+.description p {
+    display: inline;
+}
+
 
 .book-details .green {
     color: rgb(68, 216, 68);
@@ -8,8 +60,4 @@
 
 .book-details .red {
     color: rgb(216, 68, 68);
-}
-
-.book-details .on-sale {
-    background-color: rgb(97, 180, 55);
 }

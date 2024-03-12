@@ -6,7 +6,7 @@ export function ReviewList({ reviews, onRemoveReview }) {
     }
 
     if (!reviews || !reviews.length) return <div>No reviews yet</div>
-    return <ul className="review-list flex">
+    return <ul className="review-list clean-list">
         {
             reviews.map(review => <li key={review.fullName}>
                 <ReviewPreview review={review} />

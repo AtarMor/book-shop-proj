@@ -7,7 +7,8 @@ export function LongTxt({ txt, length=100 }) {
         setShowMore(prev => !prev)
     }
 
-    return <div className="long-txt">
+    return <div className="long-txt description">
+        <h3>Description</h3>
         <p>{showMore ? txt : txt.substr(0, length) + '...'}</p>
         <button onClick={onShowMore}>{showMore ? 'Show less' : 'Show more'}</button>
     </div>

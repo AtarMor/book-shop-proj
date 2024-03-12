@@ -1,0 +1,18 @@
+.review-preview {
+    display: inline;
+}
+
+.review-preview > *{
+display: inline;
+margin-inline-end: 1em;
+font-weight: lighter;
+}
+
+.add-review {
+    background-color: #fff;
+}
+
+.add-review > * {
+    margin-inline-end: 1em;
+
+}

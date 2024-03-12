@@ -41,7 +41,7 @@ export function AddReview() {
             </select>
 
 
-            <label htmlFor="readAt">Start date:</label>
+            <label htmlFor="readAt">Reading date:</label>
             <input
                 type="date"
                 id="readAt"

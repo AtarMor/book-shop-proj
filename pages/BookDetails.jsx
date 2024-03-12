@@ -47,38 +47,55 @@ export function BookDetails() {
     function priceInColor() {
         if (book.listPrice.amount > 150) return 'red'
         if (book.listPrice.amount < 20) return 'green'
+        return ''
     }
 
     if (isLoading) return <div>Loading details...</div>
     return <section className="book-details">
-        <Link to="/book"><button>Go back</button></Link>
-        <h1>{book.title}</h1>
-        <h2>{book.subtitle}</h2>
-        <h3 className={priceInColor()}>{book.listPrice.amount + ' ' + book.listPrice.currencyCode}</h3>
-        <h3 className="on-sale">{(book.listPrice.isOnSale ? ' On Sale' : '')}</h3>
-        <h4>{publishDate()}</h4>
-        <div>{book.authors.map(author => {
-            return <h4 key={author}>{author}</h4>
-        })}
+        <h1 className="book-title">{book.title}</h1>
+        <h2 className="book-subtitle">{book.subtitle}</h2>
+        <div className="book-author">Author: {book.authors.map(author =>
+            <h4 className="author-name" key={author}>{author}</h4>
+        )}
         </div>
-        <img src={book.thumbnail} />
-        <LongTxt txt={book.description} length={30} />
-        <p>Publish date: {book.publishedDate}</p>
-        <p>Page count: {book.pageCount} {readingLevel()}</p>
-        <p>Language: {book.language}</p>
 
-        <div className="flex justify-between">
+        <img src={book.thumbnail} />
+
+        <h3 className={'price ' + priceInColor()}>Price: {book.listPrice.amount + ' ' + book.listPrice.currencyCode}</h3>
+        <h3 className="on-sale">{(book.listPrice.isOnSale ? ' On Sale!' : '')}</h3>
+
+        <LongTxt txt={book.description} length={30} />
+
+        <div className="more-details">
+            <h3>More Details</h3>
+            <p className="publish-date">Publish date: {book.publishedDate}
+                <span className="new-vintage"> {publishDate()}</span>
+            </p>
+            {/* <h4 className="new-vintage">{publishDate()}</h4> */}
+            <p className="page-count">Page count: {book.pageCount} {readingLevel()}</p>
+            <p className="lang">Language: {book.language}</p>
+        </div>
+
+        <div className="reviews">
+            <h3>Reviews</h3>
+            <ReviewList
+                reviews={book.reviews}
+            />
+        </div>
+
+        <div className="add-review">
+            <h4>Add a Review</h4>
+            <AddReview
+            // onAddReview={onAddReview}
+            // onRemoveReview={onRemoveReview}
+            />
+        </div>
+
+        <div className="actions flex justify-between">
             <Link to={`/book/${book.prevBookId}`}><button>Prev</button></Link>
             <Link to={`/book/Edit/${book.id}`}><button>Edit book</button></Link>
             <Link to={`/book/${book.nextBookId}`}><button>Next</button></Link>
         </div>
-        <div><ReviewList
-            reviews={book.reviews}
-        />
-        </div>
-        <AddReview
-            // onAddReview={onAddReview}
-            // onRemoveReview={onRemoveReview}
-        />
+        {/* <Link to="/book"><button>Go back</button></Link> */}
     </section>
 }
