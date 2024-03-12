@@ -45,13 +45,25 @@ export function BookIndex() {
             })
     }
 
+    function onAddGoogleBook(book) {
+        bookService.addGoogleBook(book)
+            .then(() => {
+                setBooks(prevBooks => [...prevBooks, book])
+                showSuccessMsg('Book added successfully')
+            })
+            .catch((err) =>
+                showErrorMsg('Book exists already'))
+    }
+
     if (!books) return <div>loading...</div>
     return <section className="book-index">
         <BookFilter
             onSetFilter={onSetFilter}
             filterBy={filterBy} />
         <Link to="/book/edit"><button>Add a book</button></Link>
-        <BookAdd />
+        <BookAdd
+            onAddGoogleBook={onAddGoogleBook}
+        />
         <BookList
             books={books}
             onRemoveBook={onRemoveBook}
