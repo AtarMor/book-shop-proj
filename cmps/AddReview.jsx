@@ -1,19 +1,28 @@
+const { useNavigate, useParams } = ReactRouter
+const { useState } = React
+
+import { DynamicRate } from "./DynamicRate.jsx"
+
 import { bookService } from "../services/book.service.js"
 import { showSuccessMsg } from "../services/event-bus.service.js"
 
-const { useNavigate, useParams } = ReactRouter
-
 export function AddReview() {
     const { bookId } = useParams()
+    const [rateBy, setRateBy] = useState('select')
+
 
     function onAddReview(ev) {
         ev.preventDefault()
         const fullName = ev.target.fullName.value
         const rating = ev.target.rating.value
         const readAt = ev.target.readAt.value
-        let review = {fullName, rating, readAt}
+        let review = { fullName, rating, readAt }
         bookService.addReview(bookId, review)
         showSuccessMsg('Your review was received, thank you')
+    }
+
+    function onSelectRateBy({ target }) {
+        setRateBy(target.value)
     }
 
     return <section className="book-review">
@@ -27,19 +36,16 @@ export function AddReview() {
                 name="fullName"
             />
 
-            <label htmlFor="rating">Rating:</label>
-            <select
-                id="rating"
-                name="rating"
+            <label htmlFor="rateBy">Rate by:</label>
+            <select onChange={onSelectRateBy}
+                id="rateBy"
+                name="rateBy"
             >
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>select</option>
+                <option>textbox</option>
             </select>
 
+            <DynamicRate rateBy={rateBy} />
 
             <label htmlFor="readAt">Reading date:</label>
             <input
@@ -51,3 +57,4 @@ export function AddReview() {
         </form>
     </section>
 }
+

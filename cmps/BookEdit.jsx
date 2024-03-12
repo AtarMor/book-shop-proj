@@ -7,7 +7,6 @@ import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 export function BookEdit() {
 
   const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
-  console.log('bookToEdit:', bookToEdit)
   const navigate = useNavigate()
   const { bookId } = useParams()
 

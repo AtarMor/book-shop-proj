@@ -7,13 +7,15 @@ import { googleBookService } from "../services/google-book.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 
-export function BookAdd({onAddGoogleBook}) {
+export function BookAdd({ onAddGoogleBook }) {
     const [searchedBooks, setSearchedBooks] = useState([])
 
     function onSearchGoogleBook(ev) {
         ev.preventDefault()
         const txt = ev.target.txt.value
-        setSearchedBooks(googleBookService.query(txt))
+        googleBookService.query(txt)
+            .then(books => setSearchedBooks(books))
+        // setSearchedBooks(googleBookService.query(txt))
     }
 
     return <section className="book-add">

@@ -4,7 +4,6 @@ import { BookPreview } from "./BookPreview.jsx"
 
 
 export function BookList({ books, onRemoveBook }) {
-    console.log('books:', books)
 
     if (!books || !books.length) return <div>No books to show</div>
     return <ul className="book-list flex wrap">

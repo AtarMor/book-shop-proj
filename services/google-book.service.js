@@ -2,21 +2,37 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
-
+const GOOGLE_API = `https://www.googleapis.com/books/v1/volumes?printType=books&q=`
 
 export const googleBookService = {
     query
 }
 
+function getGoogleBooks(searchWord) {
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?printType=books&q=${searchWord}`)
+        .then(res => {
+            console.log('res.data:', res.data.items)
+            return res.data.items})
+        .catch(err => console.log('err:', err))
+}
+
 function query(txt) {
-    const books = googleDemoData.items.filter(book =>
-        book.volumeInfo.title.includes(txt))
+    return getGoogleBooks(txt)
+        .then(books => getFormattedBooks(books))
+        .catch(err => console.log('err:', err))
+    // const books = googleDemoData.items.filter(book =>
+    //     book.volumeInfo.title.includes(txt))
+    // getFormattedBooks(books)
+}
+
+function getFormattedBooks(books) {
+    console.log('booksAtFormatted:', books)
     return books.map(book => {
         const bookInfo = book.volumeInfo
         return {
             id: book.id,
             title: bookInfo.title || '',
-            subtitle: book.searchInfo.textSnippet || '',
+            subtitle: book.searchInfo ? book.searchInfo.textSnippet : '',
             authors: bookInfo.authors || [],
             publishedDate: bookInfo.publishedDate || '',
             description: bookInfo.description || '',
@@ -33,6 +49,32 @@ function query(txt) {
     }
     )
 }
+
+// function query(txt) {
+//     const books = googleDemoData.items.filter(book =>
+//         book.volumeInfo.title.includes(txt))
+//     return books.map(book => {
+//         const bookInfo = book.volumeInfo
+//         return {
+//             id: book.id,
+//             title: bookInfo.title || '',
+//             subtitle: book.searchInfo.textSnippet || '',
+//             authors: bookInfo.authors || [],
+//             publishedDate: bookInfo.publishedDate || '',
+//             description: bookInfo.description || '',
+//             pageCount: bookInfo.pageCount || '',
+//             categories: bookInfo.categories || [],
+//             thumbnail: bookInfo.imageLinks ? bookInfo.imageLinks.thumbnail : '',
+//             language: bookInfo.language || '',
+//             listPrice: {
+//                 amount: utilService.getRandomInt(10, 100),
+//                 currencyCode: 'USD',
+//                 isOnSale: false,
+//             }
+//         }
+//     }
+//     )
+// }
 
 const googleDemoData =
 {

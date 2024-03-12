@@ -1,5 +1,6 @@
 export function GoogleBookList({ books, onAddGoogleBook }) {
     console.log('books:', books)
+    if(!books) return <div>No books found</div>
     return <ul className="google-books-list clean-list">
         {
             books.map(book => 
